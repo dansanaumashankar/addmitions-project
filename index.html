@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Admission Form</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #eef2ff;
+  padding: 20px;
+}
+.container {
+  max-width: 550px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px #0002;
+}
+h2 {
+  text-align: center;
+  color: #243b80;
+}
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+input, select, textarea {
+  width: 100%;
+  padding: 11px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 20px;
+  background: #2948a5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+button:hover {
+  background: #182e75;
+}
+#result {
+  margin-top: 20px;
+  padding: 15px;
+  background: #e9f8ed;
+  border-radius: 8px;
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>Student Admission Form</h2>
+
+<form id="admissionForm">
+
+<label>Student Name</label>
+<input type="text" id="name" required>
+
+<label>Father's Name</label>
+<input type="text" id="father" required>
+
+<label>Date of Birth</label>
+<input type="date" id="dob" required>
+
+<label>Gender</label>
+<select id="gender" required>
+<option value="">Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+
+<label>Mobile Number</label>
+<input type="tel" id="phone"
+pattern="[0-9]{10}" maxlength="10" required>
+
+<label>Email Address</label>
+<input type="email" id="email">
+
+<label>Address</label>
+<textarea id="address" rows="3" required></textarea>
+
+<label>Select Course</label>
+<select id="course" required>
+<option value="">Select Course</option>
+<option>Class 10</option>
+<option>Class 12</option>
+<option>B.A.</option>
+<option>B.Sc.</option>
+<option>B.Com.</option>
+<option>Computer Course</option>
+</select>
+
+<label>Previous School / College</label>
+<input type="text" id="school">
+
+<button type="submit">Submit Admission Form</button>
+
+</form>
+
+<div id="result"></div>
+<button id="printBtn" onclick="window.print()"
+style="display:none">Print Form</button>
+
+</div>
+
+<script>
+document.getElementById("admissionForm")
+.addEventListener("submit", function(e) {
+
+e.preventDefault();
+
+const fields = {
+  "Student Name": document.getElementById("name").value,
+  "Father's Name": document.getElementById("father").value,
+  "Date of Birth": document.getElementById("dob").value,
+  "Gender": document.getElementById("gender").value,
+  "Mobile": document.getElementById("phone").value,
+  "Email": document.getElementById("email").value,
+  "Address": document.getElementById("address").value,
+  "Course": document.getElementById("course").value,
+  "Previous School": document.getElementById("school").value
+};
+
+const result = document.getElementById("result");
+
+result.innerHTML = "<h3>Admission Details</h3>";
+
+for (const key in fields) {
+  const p = document.createElement("p");
+  p.textContent = key + ": " + (fields[key] || "Not provided");
+  result.appendChild(p);
+}
+
+result.style.display = "block";
+document.getElementById("printBtn").style.display = "block";
+
+});
+
+</script>
+
+</body>
+</html>
